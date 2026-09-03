@@ -1,36 +1,31 @@
 import { useState, useEffect } from 'react'
-import Button from './Button'
-import styles from './App.module.css'
+
+function Hello() {
+  
+  function byFn() {
+    console.log("bye :<");
+  }
+
+  function hiFn() {
+    console.log("created :3 :3 :3");
+    return byFn;
+  }
+
+  useEffect(hiFn, []);
+  return <h1>HELLO :3</h1>  
+}
 
 function App() {
 
-  const [counter, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("");
-
-  const onClick = () => setValue((prev) => prev + 1);
-  const onChange = (event) => setKeyword(event.target.value);
-
-  useEffect(() => {
-    console.log("I run ONLY ONCE!");
-  }, []);
-
-  useEffect(() => {
-    console.log("I run when 'keyword' changes.");
-  }, [keyword]);
-
-  useEffect(() => {
-    console.log("I run when 'counter' changes...");
-  }, [counter]);
+  const [showing, setShowing] = useState(false);
+  const onClick = () => setShowing((prev) => !prev);
 
   return (
-    <>
-        <div>
-          <input value={keyword} onChange={onChange} type="text" placeholder="Search Here..." />
-          <h1>{counter}</h1>
-          <button onClick={onClick}>Click me</button>
-        </div>
-    </>
-  )
+  <div>
+    {showing ? <Hello /> : null}
+    <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+  </div>
+  );
 }
 
 export default App;
