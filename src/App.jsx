@@ -1,20 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from './Button'
 import styles from './App.module.css'
 
 function App() {
 
+  const [counter, setValue] = useState(0);
+  const onClick = () => setValue((prev) => prev + 1);
+  console.log('i run all the time ---!');
+
+  useEffect(() => {
+    console.log("CALL THE API@@@");
+  }, []);
+
   return (
     <>
-      <section>
         <div>
-          <h1 className={styles.title}>Welcome Back@@@</h1>
-          <Button text={"귀요미"} />
+          <h1>{counter}</h1>
+          <button onClick={onClick}>Click me</button>
         </div>
-      </section>
     </>
   )
-
 }
 
 export default App;
